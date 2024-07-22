@@ -45,6 +45,10 @@ const CreateIncidentForm = () => {
     mutation.mutate(formData);
   };
 
+  const handleCancel = () => {
+    navigate(-1); // Navega a la página anterior
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-500 to-green-500 flex items-center justify-center">
       <div className="max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-6">
@@ -111,9 +115,14 @@ const CreateIncidentForm = () => {
               <option value="en-proceso">En Proceso</option>
             </select>
           </div>
-          <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-            {mutation.isLoading ? 'Creando...' : 'Crear Incidencia'}
-          </button>
+          <div className="flex space-x-4">
+            <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+              {mutation.isLoading ? 'Creando...' : 'Crear Incidencia'}
+            </button>
+            <button type="button" onClick={handleCancel} className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+              Cancelar
+            </button>
+          </div>
           {mutation.isError && <div className="mt-4 text-red-600">Error: {mutation.error.message}</div>}
           {mutation.isSuccess && <div className="mt-4 text-green-600">Incidencia creada con éxito!</div>}
         </form>
